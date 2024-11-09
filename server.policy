@@ -1,0 +1,7 @@
+grant {
+    // Allow the server to bind to a specific port and communicate via RMI
+    permission java.net.SocketPermission "*:1024-", "listen,accept,resolve";
+    // Allow the server to read properties and set security manager
+    permission java.util.PropertyPermission "java.rmi.server.hostname", "read,write";
+    permission java.security.AllPermission;
+};
