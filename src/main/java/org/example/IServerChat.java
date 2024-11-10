@@ -10,7 +10,7 @@ public interface IServerChat extends Remote {
     public void addRoom(String roomName, String creatorUsername) throws RemoteException;
 
     // Method to remove an existing chat room.
-    public void removeRoom(String roomName, String username) throws RemoteException;
+    public boolean removeRoom(String roomName, String username) throws RemoteException;
 
     // Method to register a client with a username and password.
     void signIn(String username, String password, org.example.IClientChat client) throws RemoteException;

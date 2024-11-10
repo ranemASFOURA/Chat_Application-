@@ -60,7 +60,7 @@ public class ServerChatImpl extends UnicastRemoteObject implements IServerChat {
 
     // Method to remove an existing chat room
     @Override
-    public void removeRoom(String roomName, String username) throws RemoteException {
+    public boolean removeRoom(String roomName, String username) throws RemoteException {
         // Check if the room exists
         if (chatRooms.containsKey(roomName)) {
             // Verify that the requesting user is the creator of the room
@@ -68,14 +68,19 @@ public class ServerChatImpl extends UnicastRemoteObject implements IServerChat {
                 chatRooms.remove(roomName);
                 roomOwners.remove(roomName);
                 System.out.println("Room removed: " + roomName + " by " + username);
+                return true; // Operation successful
             } else {
-                // If the user is not the creator, throw an exception
-                throw new RemoteException("Only the creator of the room can remove it.");
+                // If the user is not the creator of the room
+                System.out.println("User " + username + " is not allowed to remove room " + roomName);
+                return false; // Operation unsuccessful
             }
         } else {
-            throw new RemoteException("Room does not exist: " + roomName);
+            System.out.println("Room does not exist: " + roomName);
+            return false; // Room does not exist
         }
     }
+
+
 
     // Method to sign in a user, validating their username and password
     @Override
